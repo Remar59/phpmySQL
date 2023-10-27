@@ -16,7 +16,7 @@ require('connexion.php');
 
 //variables pour récupérer les infos du formulaire
 //l'id est récupéré grâce aux checkbox (sous forme de tableau)
-$id = $_POST["id"];
+$id = $_POST["ID"];
 
 
 //On s'assure que le bouton radio a bien été coché (si la valeur id est vide, on retourne directement sur l'index)
@@ -36,9 +36,9 @@ else{
     //AFFICHAGE DU NOM SUPPRIME (ne s'affichera pas vu qu'on fait un retour vers l'index)
 
     //comme on récupère l'id via les checkbox, il peut y en avoir plusieurs, du coup les id seront stockés sous forme de tableau donc on passe par un foreach
-    foreach($_POST["id"] as $choix){
+    foreach($_POST["ID"] as $choix){
         //requête => affiche le nom et prenom de la BDD où l'id correspond à la checkbox cochée (une par une vu qu'on est dans une boucle)
-        $select = "SELECT  `nom`, `prenom` FROM `apprenant` WHERE `id` = '" . $choix . "'";
+        $select = "SELECT  `NOM`, `PRENOM` FROM `apprenant` WHERE `ID` = '" . $choix . "'";
         //on execute la requete
         $res_select = mysqli_query($connect, $select);
         //on créé une variable pour stocker les infos de la requête sous forme de tableau (on s'en servira pour afficher le nom supprimé)
@@ -47,12 +47,12 @@ else{
         //SUPPRESSION
         
         //requête => supprime la ligne du tableau apprenants où l'id correspond à la checkbox cochée (une par une vu qu'on est dans une boucle)
-        $delete = "DELETE  FROM `apprenant` WHERE `id` = '" . $choix . "'";
+        $delete = "DELETE  FROM `apprenant` WHERE `ID` = '" . $choix . "'";
         //on l'exécute
         $res_delete = mysqli_query($connect, $delete);
 
         //on ajoute le nom de la personne supprimée dans le tableau
-        array_push($array_supp, $data['prenom'] . " " . $data['nom']);
+        array_push($array_supp, $data['PRENOM'] . " " . $data['NOM']);
     }
     
     //si plusieurs personnes ont été supprimées
@@ -69,7 +69,7 @@ else{
     //si une seule personne a été supprimée
     else{
         //on retourne à l'index en affichant un message
-        header('Location: index.php?message=' . "L'utilisateur " . $data['prenom'] . " " . $data['nom'] . " a été supprimé.");
+        header('Location: index.php?message=' . "L'utilisateur " . $data['PRENOM'] . " " . $data['NOM'] . " a été supprimé.");
         exit();
     }
 }

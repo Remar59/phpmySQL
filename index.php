@@ -18,8 +18,8 @@
     //on attribue à la variable $connect la valeur retournée par connexion()
     $connect = connexion();
 
-$req_metier = "SELECT DISTINCT `libelle_rome` FROM `metiers` ORDER BY `libelle_rome`";
-$res_req_metier = $connect -> query($req_metier);
+    $req_metier = "SELECT DISTINCT `libelle_rome` FROM `metiers` ORDER BY `libelle_rome`";
+    $res_req_metier = $connect->query($req_metier);
 
     ?>
     <!-- on ferme le PHP et on revient en HTML -->
@@ -37,23 +37,21 @@ On utilisera la classe "formaction" dans les boutons de validation (input submit
             style="width:fit-content; display:flex; flex-direction: column; gap:10px; align-items:center">
             <div>
                 <!-- les input Nom et Prenom nous serons utiles pour l'insertion et l'update -->
-                <input type="text" placeholder="Nom" name="nom" maxlength="30" minlength="2"
+                <input type="text" placeholder="Nom" name="NOM" maxlength="30" minlength="2"
                     style="width:200px; font-size:15px">
-                <input type="text" placeholder="Prénom" name="prenom" maxlength="30" minlength="2"
+                <input type="text" placeholder="Prénom" name="PRENOM" maxlength="30" minlength="2"
                     style="width:200px; font-size:15px">
 
                 <!-- Input permettant de modifier le champs métier, suivi de la recherche permettant de trouver le nom de métier dans la base de donnée existante-->
-                <input type="text" placeholder="Métier" name="metier" maxlength="30" minlength="2"
-                    style="width:200px; font-size:15px">
                 <label>Métier</label><select name="Search">
-<?php
+                    <?php
 
-                while($data = mysqli_fetch_array($res_req_metier)){
-                    echo "<option> {$data['libelle_rome']} </option>";
-                }
+                    while ($data = mysqli_fetch_array($res_req_metier)) {
+                        echo "<option> {$data['libelle_rome']} </option>";
+                    }
                     ?>
                 </select>
-                
+
 
                 <!-- Bouton 1 = Ajouter (voir "insert.php")-->
                 <input type="submit" value="Ajouter" name="insert" class="btn1"

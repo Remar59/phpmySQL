@@ -19,8 +19,8 @@ $connect=connexion();
 //VARIABLES
 
 //variables de récupération du formulaire
-$nom = $_POST['nom'] ;
-$prenom = $_POST['prenom'] ;
+$nom = $_POST['NOM'] ;
+$prenom = $_POST['PRENOM'] ;
 
     
 //VERIFICATION
@@ -48,7 +48,7 @@ else{
     //VERIFICATION DISPONIBILITE
 
     //on créé une variable qui regroupe la requête MySQL => affiche un nom + prenom de la BDD si celui-ci correspond au nom + prenom rentré dans le formulaire
-    $dispo = "SELECT `nom`, `prenom` FROM `apprenant` WHERE `nom` = '" . $nom . "' AND `prenom` = '" . $prenom . "'";
+    $dispo = "SELECT `NOM`, `PRENOM` FROM `apprenant` WHERE `NOM` = '" . $nom . "' AND `PRENOM` = '" . $prenom . "'";
     //on créé une variable qui va stocker l'execution de la requête
     $res_dispo = mysqli_query($connect, $dispo);
     //mysqli_num_rows() permet de récupérer le nombre de lignes de la requête éxecutée (explication après)
@@ -65,7 +65,7 @@ else{
         //INSERTION
         
         //variable de requete 
-        $insert = "INSERT INTO `apprenant` (`nom`, `prenom`) VALUES ('$nom', '$prenom')";
+        $insert = "INSERT INTO `apprenant` (`NOM`, `PRENOM`) VALUES ('$nom', '$prenom')";
         $req_insert = $connect -> query($insert); //  autre commande = mysqli_query($connect, $insert);   //
         
         //MESSAGE

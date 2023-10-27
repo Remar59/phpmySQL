@@ -14,8 +14,8 @@ require("connexion.php");
 //VARIABLES
 
 //variables pour récupérer les infos du formulaire
-$nom = $_POST["nom"];
-$prenom = $_POST["prenom"];
+$nom = $_POST["NOM"];
+$prenom = $_POST["PRENOM"];
 $id = $_POST["radio_update"];
 
 
@@ -34,7 +34,7 @@ else{
     //VERIFICATION DISPONIBILITE DU NOM
 
     //on créé une variable qui regroupe la requête MySQL => affiche un nom + prenom de la BDD si celui-ci correspond au nom + prenom rentré dans le formulaire
-    $verifnom = "SELECT `nom`, `prenom` FROM `apprenant` WHERE `nom` = '" . $nom . "' AND `prenom` = '" . $prenom . "'";
+    $verifnom = "SELECT `NOM`, `PRENOM` FROM `apprenant` WHERE `NOM` = '" . $nom . "' AND `PRENOM` = '" . $prenom . "'";
     //on créé une variable qui va stocker l'execution de la requête
     $res_verifnom = mysqli_query($connect, $verifnom);
     //mysqli_num_rows() permet de récupérer le nombre de lignes de la requête éxecutée (explication après)
@@ -67,11 +67,11 @@ else{
         //MESSAGE
 
 
-        $select = "SELECT `nom`, `prenom` FROM `apprenant` where `id` = '" . $id . "'";
+        $select = "SELECT `NOM`, `PRENOM` FROM `apprenant` where `ID` = '" . $id . "'";
         $res_select = mysqli_query($connect, $select);
         while($data = mysqli_fetch_array($res_select)){
             // on retourne à l'index
-            header('Location: index.php?message=' . "L'utilisateur " . $data['prenom'] . ' ' . $data['nom'] . ' a été remplacé par ' . $prenom . ' ' . $nom . '.');
+            header('Location: index.php?message=' . "L'utilisateur " . $data['prenom'] . ' ' . $data['NOM'] . ' a été remplacé par ' . $prenom . ' ' . $nom . '.');
             // on met pas de exit ici car on veut que le code continue de s'exécuter pour pouvoir faire l'update
         }
 
@@ -79,7 +79,7 @@ else{
         
         //on fait l'update après le message car sinon les valeurs nom et prenom dans la requête auraient déjà été modifiées
         //requête => on change le nom et prénom de la ligne de la BDD où l'id correspond à l'id qu'on a choisi avec le bouton radio dans le formulaire
-        $update = "UPDATE `apprenant` SET `nom` = '" . $nom . "', `prenom` = '" . $prenom . "' WHERE `apprenant`.`id` = '" . $id . "'";
+        $update = "UPDATE `apprenant` SET `NOM` = '" . $nom . "', `PRENOM` = '" . $prenom . "' WHERE `apprenant`.`ID` = '" . $id . "'";
         //on l'exécute
         $res_update = mysqli_query($connect, $update);
     }
